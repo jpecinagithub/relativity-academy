@@ -6,6 +6,7 @@ import {
 } from "lucide-react";
 import { useApp } from "../stores/app";
 import { globalStrings } from "../i18n/global";
+import { modules } from "../data/modules";
 import { cn } from "../utils/cn";
 
 const AUTHOR = "Jon Peciña";
@@ -80,7 +81,7 @@ function ProgressPill() {
         style={{ background: "var(--green)" }}
         aria-hidden
       />
-      {completedModules.length}/9
+      {completedModules.length}/{modules.length}
     </Link>
   );
 }
