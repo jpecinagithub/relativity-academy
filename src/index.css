@@ -1,0 +1,225 @@
+@import "tailwindcss";
+@import "katex/dist/katex.min.css";
+
+/* ─── Relativity Fundamentals Academy design system ───
+   Restrained "scientific instrument / observatory" aesthetic.
+   Deep-space background, ivory text, cyan + amber + violet accents. */
+
+:root,
+[data-theme="dark"] {
+  --bg: #070b14;
+  --bg-panel: #0c1222;
+  --bg-elev: #121a30;
+  --bg-inset: #05080f;
+  --text: #efe9da;
+  --text-dim: #a3adbf;
+  --text-faint: #6b7590;
+  --border: rgba(239, 233, 218, 0.1);
+  --border-strong: rgba(239, 233, 218, 0.22);
+  --cyan: #3ee6ff;
+  --cyan-dim: rgba(62, 230, 255, 0.14);
+  --amber: #f5a524;
+  --amber-dim: rgba(245, 165, 36, 0.13);
+  --violet: #a78bfa;
+  --violet-dim: rgba(167, 139, 250, 0.13);
+  --green: #4ade80;
+  --red: #f87171;
+  --grid-line: rgba(148, 178, 255, 0.09);
+  --shadow: 0 18px 50px -18px rgba(0, 0, 0, 0.65);
+  color-scheme: dark;
+}
+
+[data-theme="light"] {
+  --bg: #f6f2e8;
+  --bg-panel: #fffdf7;
+  --bg-elev: #ece5d3;
+  --bg-inset: #e9e1cd;
+  --text: #17202f;
+  --text-dim: #4c5870;
+  --text-faint: #8a93a8;
+  --border: rgba(23, 32, 47, 0.12);
+  --border-strong: rgba(23, 32, 47, 0.28);
+  --cyan: #0891b2;
+  --cyan-dim: rgba(8, 145, 178, 0.1);
+  --amber: #b45309;
+  --amber-dim: rgba(180, 83, 9, 0.1);
+  --violet: #7c3aed;
+  --violet-dim: rgba(124, 58, 237, 0.1);
+  --green: #15803d;
+  --red: #b91c1c;
+  --grid-line: rgba(30, 60, 120, 0.1);
+  --shadow: 0 18px 45px -22px rgba(60, 70, 100, 0.35);
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.font-display {
+  font-family: "Space Grotesk", "Inter", system-ui, sans-serif;
+  letter-spacing: -0.015em;
+}
+
+.font-mono2 {
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Reusable surfaces */
+.panel {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+}
+.panel-elev {
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+}
+.inset {
+  background: var(--bg-inset);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--cyan);
+  color: #04121a;
+  font-weight: 650;
+  padding: 0.7rem 1.35rem;
+  border-radius: 0.8rem;
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+.btn-primary:hover { filter: brightness(1.08); transform: translateY(-1px); }
+.btn-primary:active { transform: translateY(0); }
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid var(--border-strong);
+  color: var(--text);
+  font-weight: 550;
+  padding: 0.7rem 1.35rem;
+  border-radius: 0.8rem;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+.btn-ghost:hover { background: var(--bg-elev); transform: translateY(-1px); }
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.28rem 0.65rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+}
+
+/* Range sliders — accessible, instrument-like */
+input[type="range"].rfa-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 26px;
+  background: transparent;
+  cursor: pointer;
+}
+input[type="range"].rfa-slider::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(to right, var(--cyan) 0%, var(--cyan) var(--fill, 50%), var(--bg-elev) var(--fill, 50%), var(--bg-elev) 100%);
+  border: 1px solid var(--border);
+}
+input[type="range"].rfa-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  margin-top: -8px;
+  border-radius: 50%;
+  background: var(--bg-panel);
+  border: 2.5px solid var(--cyan);
+  box-shadow: 0 0 0 4px var(--cyan-dim);
+}
+input[type="range"].rfa-slider::-moz-range-track {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+}
+input[type="range"].rfa-slider::-moz-range-progress {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--cyan);
+}
+input[type="range"].rfa-slider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--bg-panel);
+  border: 2.5px solid var(--cyan);
+}
+input[type="range"].rfa-slider:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+/* KaTeX inherits theme text color */
+.katex { color: var(--text); font-size: 1.08em; }
+
+/* Focus visibility everywhere */
+:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--bg-elev); border-radius: 8px; border: 2px solid var(--bg); }
+::-webkit-scrollbar-thumb:hover { background: var(--text-faint); }
+
+/* Prose for lesson content */
+.rfa-prose p { margin: 0.85rem 0; line-height: 1.75; color: var(--text-dim); }
+.rfa-prose p strong, .rfa-prose li strong { color: var(--text); }
+.rfa-prose ul { margin: 0.85rem 0; padding-left: 1.3rem; list-style: disc; color: var(--text-dim); line-height: 1.7; }
+.rfa-prose ol { margin: 0.85rem 0; padding-left: 1.3rem; list-style: decimal; color: var(--text-dim); line-height: 1.7; }
+.rfa-prose li { margin: 0.4rem 0; }
+.rfa-prose h3 { font-family: "Space Grotesk", sans-serif; font-size: 1.25rem; margin: 1.8rem 0 0.6rem; color: var(--text); }
+.rfa-prose blockquote {
+  border-left: 3px solid var(--amber);
+  padding: 0.4rem 0 0.4rem 1rem;
+  margin: 1.2rem 0;
+  font-style: italic;
+  color: var(--text);
+  background: var(--amber-dim);
+  border-radius: 0 0.6rem 0.6rem 0;
+}
